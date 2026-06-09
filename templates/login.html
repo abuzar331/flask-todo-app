@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container my-3">
+
+    <h2>Login</h2>
+
+    <form method="POST">
+
+        <div class="mb-4">
+            <label>Email</label>
+            <input
+                type="email"
+                class="form-control"
+                name="email"
+                required
+            >
+        </div>
+
+        <div class="input-group">
+             <input type="password" class="form-control" id="password" name="password" required >
+             <span class="input-group-text" onclick="togglePassword()" style="cursor:pointer;" >
+                 <i id="eyeIcon" class="bi bi-eye"></i> </span> 
+                 
+            </div>
+
+        <button
+            type="submit"
+            class="btn btn-dark mt-3"
+        >
+            Login
+        </button>
+
+    </form>
+
+</div>
+ 
+<script>
+function togglePassword() {
+
+    let password =
+        document.getElementById("password");
+
+    let eyeIcon =
+        document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        eyeIcon.classList.remove("bi-eye");
+        eyeIcon.classList.add("bi-eye-slash");
+
+    } else {
+
+        password.type = "password";
+
+        eyeIcon.classList.remove("bi-eye-slash");
+        eyeIcon.classList.add("bi-eye");
+    }
+}
+</script>
+
+{% endblock %}

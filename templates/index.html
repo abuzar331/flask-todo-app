@@ -14,7 +14,30 @@
     <label for="desc" class="form-label">Todo desciption</label>
     <input type="text" class="form-control" name="desc" id="desc">
   </div>
-  
+  <div class="mb-3">
+    <label>Due Date</label>
+    <input
+        type="date"
+        class="form-control"
+        name="due_date"
+    >
+</div>
+
+
+
+<div class="mb-3">
+    <label>Priority</label>
+    <select
+        class="form-control"
+        name="priority"
+    >
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+    </select>
+
+
+</div>
   <button type="submit" class="btn btn-dark">Submit</button>
 </form>
     </div>
@@ -29,30 +52,73 @@
     {% else %}
        <table class="table">
   <thead>
-    <tr>
-      <th scope="col">sNO</th>
-      <th scope="col">Title</Title></th>
-      <th scope="col">description</th>
-      <th scope="col">time</th>
-      <th scope="col">Actions<th>
-       
-    </tr>
-  </thead>
+  <tr>
+    <th scope="col">SNo</th>
+    <th scope="col">Title</th>
+    <th scope="col">Description</th>
+    <th scope="col">Created</th>
+    <th scope="col">Due Date</th>
+    <th scope="col">Priority</th>
+    <th scope="col">Actions</th>
+  </tr>
+</thead>
   <tbody>
       
-    
     {% for todo in allTodo %}
-       <tr>
-      <th scope="row">{{loop.index}}</th>
-      <td>{{todo.title}}</td>
-      <td>{{todo.desc}}</td>
-      <td>@{{todo.date_created}}</td>
-      <td><a href="/update/{{ todo.sno }}" type="button" class="btn btn-outline-danger btn-sm  gap-2 d-md-block ">update</a></td>
-      <td><a href="/delete/{{ todo.sno }}" type="button" class="btn btn-outline-danger btn-sm  gap-2 d-md-block">Delete</a></td>
-     
-    </tr>
-   
-    {% endfor %}
+
+<th scope="row">{{ loop.index }}</th>
+
+<td>{{ todo.title }}</td>
+
+<td>{{ todo.desc }}</td>
+
+<td>
+    {{ todo.date_created.strftime('%d-%m-%Y') }}
+</td>
+
+<td>
+    {% if todo.due_date %}
+        {{ todo.due_date.strftime('%d-%m-%Y') }}
+    {% else %}
+        No Due Date
+    {% endif %}
+</td>
+
+<td>
+    {% if todo.priority == "High" %}
+        <span class="badge bg-danger">
+            High
+        </span>
+
+    {% elif todo.priority == "Medium" %}
+        <span class="badge bg-warning text-dark">
+            Medium
+        </span>
+
+    {% else %}
+        <span class="badge bg-success">
+            Low
+        </span>
+    {% endif %}
+</td>
+
+<td>
+    <a href="/update/{{ todo.sno }}"
+       class="btn btn-outline-primary btn-sm ">
+       Update
+    </a>
+
+    <a href="/delete/{{ todo.sno }}"
+       class="btn btn-outline-danger btn-sm">
+       Delete
+    </a>
+</td>
+
+
+</tr>
+{% endfor %}
+
+    
   </tbody>
 </table>
    {% endif %}

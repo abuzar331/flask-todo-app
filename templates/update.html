@@ -12,8 +12,30 @@
   </div>
   <div class="mb-3">
     <label for="desc" class="form-label">Todo desciption</label>
-    <input type="text" class="form-control" n value="{{todo.desc}} " name="desc" id="desc">
+    <input type="text" class="form-control" nvalue="{{todo.desc}} " name="desc" id="desc">
   </div>
+
+
+
+<div class="mb-3">
+    <label>Due Date</label>
+   <input
+    type="date"
+    class="form-control"
+    name="due_date"
+    value="{{ todo.due_date }}">
+</div>
+
+<div class="mb-3">
+    <label>Priority</label>
+
+<option value="Low" {% if todo.priority == "Low" %}selected{% endif %}> Low </option> 
+<option value="Medium" {% if todo.priority == "Medium" %}selected{% endif %}> Medium </option> 
+<option value="High" {% if todo.priority == "High" %}selected{% endif %}> High </option>
+
+
+</div>
+
   
   <button type="submit" class="btn btn-dark">update</button>
 </form>
